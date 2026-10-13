@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bdfjwhunihcdw"]
+
+[ext_resource type="Script" uid="uid://sr0tmtfxhaj4" path="res://src/dictionary/DictionaryParser.gd" id="1_d5kvw"]
+[ext_resource type="JSON" path="res://src/dictionary/words_dictionary.json" id="2_canpa"]
+
+[node name="DictionarySystem" type="Node" unique_id=171886262]
+script = ExtResource("1_d5kvw")
+dictionary = ExtResource("2_canpa")
