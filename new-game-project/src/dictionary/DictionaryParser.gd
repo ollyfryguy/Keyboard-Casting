@@ -14,7 +14,8 @@ func _ready() -> void:
 		var jsonData : Dictionary = json.data
 		if typeof(jsonData) == TYPE_DICTIONARY:
 			words = jsonData.keys()
-
+	else:
+		print("JSON Parse Error: ", json.get_error_message(), " in ", JSON.stringify(dictionary), " at line ", json.get_error_line())
 
 	print(getRandomWord(5))
 
