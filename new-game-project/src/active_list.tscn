@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://keek3au4666g"]
+
+[ext_resource type="Script" uid="uid://goyr3bmuhc3d" path="res://src/GlobalActiveList.gd" id="1_8b8a7"]
+
+[node name="ActiveList" type="Node" unique_id=1418481552]
+script = ExtResource("1_8b8a7")

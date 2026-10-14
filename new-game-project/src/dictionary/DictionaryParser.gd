@@ -3,6 +3,7 @@ extends Node
 @export var dictionary : JSON
 
 var words : Array = []
+var currentWords : PackedStringArray = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,16 +18,24 @@ func _ready() -> void:
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", JSON.stringify(dictionary), " at line ", json.get_error_line())
 
-	print(getRandomWord(5))
+	# Test Case
+	currentWords.append_array(getRandomWord(10))
+	GlobalActiveList.ActiveListArray = currentWords
+	GlobalActiveList.ActiveList = formatWordArray(currentWords)
+	print(GlobalActiveList.ActiveListArray)
+	print(GlobalActiveList.ActiveList)
 
 	pass # Replace with function body.
 
-func getRandomWord(count: int) -> Array[String]:
+func getRandomWord(count: int) -> PackedStringArray:
 	var wordArray : Array = []
 	
 	for i in count:
 		wordArray.append(words.pick_random())
 	return wordArray
+
+func formatWordArray(array: PackedStringArray) -> String:
+	return " ".join(array)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
