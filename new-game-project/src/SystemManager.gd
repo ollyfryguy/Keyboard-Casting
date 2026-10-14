@@ -1,0 +1,26 @@
+extends Node
+
+#All High Level Systems
+@export var DictionaryParserScene : PackedScene
+@export var ModifierHandlerScene : PackedScene
+
+#Testing Only
+@export var ShiftModifierScene : PackedScene
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+
+	var DictionaryParser : Node = DictionaryParserScene.instantiate()
+	add_child(DictionaryParser)
+	var ModifierHandler : Node = ModifierHandlerScene.instantiate()
+	add_child(ModifierHandler)
+
+	#Testing Only
+	var ShiftModifier : Node = ShiftModifierScene.instantiate()
+	ModifierHandler.add_child(ShiftModifier)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass

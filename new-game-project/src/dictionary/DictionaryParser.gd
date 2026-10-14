@@ -4,6 +4,9 @@ extends Node
 
 var words : Array = []
 var currentWords : PackedStringArray = []
+var formattedWordList : String = ""
+
+signal wordSendRequest(wordList : String)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,10 +23,13 @@ func _ready() -> void:
 
 	# Test Case
 	currentWords.append_array(getRandomWord(10))
-	GlobalActiveList.ActiveListArray = currentWords
-	GlobalActiveList.ActiveList = formatWordArray(currentWords)
-	print(GlobalActiveList.ActiveListArray)
-	print(GlobalActiveList.ActiveList)
+	formattedWordList = formatWordArray(currentWords)
+	wordSendRequest.emit(formattedWordList)
+
+	#GlobalActiveList.ActiveListArray = currentWords
+	#GlobalActiveList.ActiveList = formatWordArray(currentWords)
+	#print(GlobalActiveList.ActiveListArray)
+	#print(GlobalActiveList.ActiveList)
 
 	pass # Replace with function body.
 
