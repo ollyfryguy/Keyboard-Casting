@@ -20,6 +20,11 @@ func _ready() -> void:
 	ModifierHandler.add_child(ShiftModifier)
 	pass # Replace with function body.
 
+	$DictionarySystem.wordSendRequest.connect($ModifierHandler/ShiftModifier.updateKnownText)
+
+
+func recieveTextUpdate() -> void:
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://btbnm3h0ehohw"]
-
-[ext_resource type="Script" uid="uid://g0so0t80v0eg" path="res://src/modifiers/shift_modifier.gd" id="1_dm24h"]
-
-[node name="shiftModifier" type="Node" unique_id=1462072987]
-script = ExtResource("1_dm24h")

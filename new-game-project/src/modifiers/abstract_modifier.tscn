@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cdjvfxoll8n6n"]
-
-[ext_resource type="Script" uid="uid://cxl1a8cam2jyu" path="res://src/modifiers/AbstractModifier.gd" id="1_jat8a"]
-
-[node name="AbstractModifier" type="Node" unique_id=978231967]
-script = ExtResource("1_jat8a")

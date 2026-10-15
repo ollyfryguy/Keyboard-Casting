@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://da5lg8h858vyv" path="res://src/SystemManager.gd" id="1_65u1q"]
 [ext_resource type="PackedScene" uid="uid://bdfjwhunihcdw" path="res://src/dictionary/dictionary_system.tscn" id="2_g3w2m"]
 [ext_resource type="PackedScene" uid="uid://1o4xuqdi40u6" path="res://src/modifiers/modifier_handler.tscn" id="3_g3w2m"]
-[ext_resource type="PackedScene" uid="uid://btbnm3h0ehohw" path="res://src/modifiers/shift_modifier.tscn" id="4_qklge"]
+[ext_resource type="PackedScene" uid="uid://cu2v7qsj8wd4g" path="res://src/Scenes/shift_modifier.tscn" id="4_qklge"]
 
 [node name="GameRoot" type="Node" unique_id=761752279]
 process_mode = 3
