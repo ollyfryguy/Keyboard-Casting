@@ -43,6 +43,12 @@ func getRandomWord(count: int) -> PackedStringArray:
 func formatWordArray(array: PackedStringArray) -> String:
 	return " ".join(array)
 
+# Meant to be accessed via signal from System Manager.
+func sendWord(wordList : String) -> void:
+	wordSendRequest.emit(wordList)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	#TEMP
+	wordSendRequest.emit(formattedWordList)
 	pass

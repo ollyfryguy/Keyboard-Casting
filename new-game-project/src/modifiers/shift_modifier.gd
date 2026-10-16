@@ -1,8 +1,17 @@
 extends AbstractModifier
 
+
 # _ready handled by abstract modifier
+func _ready() -> void:
+	connectInitialization()
+	super._ready()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func connectInitialization() -> void:
+	initialized.connect(printKnownText)
 	pass
+
+
+func printKnownText() -> void:
+	print(knownText)
+	print("this did something")
