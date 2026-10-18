@@ -4,3 +4,4 @@
 
 [node name="ShiftModifier" type="Node" unique_id=631748792]
 script = ExtResource("1_juqtx")
+shiftAmount = 1
