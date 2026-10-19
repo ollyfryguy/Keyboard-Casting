@@ -30,3 +30,6 @@ func _process(_delta: float) -> void:
 
 func updateKnownText(text : String) -> void:
 	knownText = text
+
+func textToWordArray(text : String) -> PackedStringArray:
+	return text.split(" ")

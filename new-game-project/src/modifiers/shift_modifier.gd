@@ -14,9 +14,16 @@ func connectInitialization() -> void:
 
 
 func shiftText() -> void:
+
+	var knownTextArray : PackedStringArray = textToWordArray(knownText)
+	randomize()
+	var randomWordIndex : int = randi() % knownTextArray.size()
+	var randomWord : String = knownTextArray[randomWordIndex]
+	knownTextArray.remove_at(randomWordIndex)
+
 	var characterArray : PackedStringArray
-	for index in knownText.length():
-		var originalCharacter : String = knownText[index]
+	for index in randomWord.length():
+		var originalCharacter : String = randomWord[index]
 		var character : String = originalCharacter.to_lower()
 		if character == " ":
 			characterArray.append(originalCharacter)
@@ -32,8 +39,11 @@ func shiftText() -> void:
 		else:
 			push_error("Couldn't find character; not in standard alphabet.")
 
+	knownTextArray.insert(randomWordIndex, "".join(characterArray))
+	var shiftedText : String = " ".join(knownTextArray)
+
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
-	print("Shifted Text: ", "".join(characterArray))
+	print("Shifted Text: ", shiftedText)
 	GlobalActiveList.ActiveList = "".join(characterArray)
 	pass
