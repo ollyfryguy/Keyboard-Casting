@@ -15,27 +15,25 @@ func connectInitialization() -> void:
 
 func shiftText() -> void:
 	var characterArray : PackedStringArray
-	for character : String in knownText.to_lower():
-		if character == "" or character == " ":
-			characterArray.append(character)
-		elif alphabet.find(character) != -1 && alphabet.find(character) != alphabet.size()-1:
-			characterArray.append(alphabet.get(alphabet.find(character) + shiftAmount))
-		elif alphabet.find(character) == alphabet.size() - 1: #Loop Back Around for Z
-			characterArray.append(alphabet.get(0))
-		elif alphabet.find(character) == -1 && character != "" && character != " ":
+	for index in knownText.length():
+		var originalCharacter : String = knownText[index]
+		var character : String = originalCharacter.to_lower()
+		if character == " ":
+			characterArray.append(originalCharacter)
+		elif alphabet.find(character) != -1:
+			var shiftedCharacter : String
+			if alphabet.find(character) != alphabet.size() - 1:
+				shiftedCharacter = alphabet.get(alphabet.find(character) + shiftAmount)
+			else: # Loop Back Around for Z
+				shiftedCharacter = alphabet.get(0)
+			if originalCharacter != character:
+				shiftedCharacter = shiftedCharacter.to_upper()
+			characterArray.append(shiftedCharacter)
+		else:
 			push_error("Couldn't find character; not in standard alphabet.")
-	
-	# If capitalized in initial text, make capitalized in shifted text
-	for index in range(characterArray.size()):
-		if knownText.left(index) == knownText.left(index).capitalize():
-			characterArray[index] = characterArray[index].capitalize()
 
 	# DEBUG ONLY
-	print("Initial Text:", knownText)
-	print("Shifted Text:", "".join(characterArray))
+	print("Initial Text: ", knownText)
+	print("Shifted Text: ", "".join(characterArray))
 	GlobalActiveList.ActiveList = "".join(characterArray)
 	pass
-
-#func printKnownText() -> void:
-	#print(knownText)
-	#print("this did something")
