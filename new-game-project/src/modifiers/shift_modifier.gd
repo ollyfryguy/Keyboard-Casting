@@ -15,11 +15,14 @@ func connectInitialization() -> void:
 
 func shiftText() -> void:
 
+	
 	var knownTextArray : PackedStringArray = textToWordArray(knownText)
 	randomize()
-	var randomWordIndex : int = randi() % knownTextArray.size()
+	var randomWordIndex : int = randomIndex(knownTextArray)
+	@warning_ignore("shadowed_variable_base_class")
 	var randomWord : String = knownTextArray[randomWordIndex]
 	knownTextArray.remove_at(randomWordIndex)
+
 
 	var characterArray : PackedStringArray
 	for index in randomWord.length():
@@ -45,5 +48,5 @@ func shiftText() -> void:
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
 	print("Shifted Text: ", shiftedText)
-	GlobalActiveList.ActiveList = "".join(characterArray)
+	GlobalActiveList.ActiveList = shiftedText
 	pass
