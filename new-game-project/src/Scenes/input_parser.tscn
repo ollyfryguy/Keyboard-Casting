@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dgp6x73y6glnr"]
+
+[ext_resource type="Script" uid="uid://cpgjamavmkf57" path="res://InputParser.gd" id="1_tlhr7"]
+
+[node name="InputParser" type="Node" unique_id=1833349647]
+script = ExtResource("1_tlhr7")
+repeatCharTimeMS = 50.0
+beginRepeatingTimeMS = 400.0
+
+[node name="RepeatTimer" type="Timer" parent="." unique_id=1769413581]
+ignore_time_scale = true
+
+[node name="StartTimer" type="Timer" parent="." unique_id=233137144]
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="RepeatTimer" to="." method="onRepeatTimerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="onStartTimerTimeout"]
