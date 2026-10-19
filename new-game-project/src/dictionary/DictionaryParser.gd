@@ -41,7 +41,11 @@ func getRandomWord(count: int) -> PackedStringArray:
 	return wordArray
 
 func formatWordArray(array: PackedStringArray) -> String:
-	return " ".join(array)
+	var string : String = " ".join(array)
+	# String cannot have multiple spaces (see @abstract_modifier)
+	if string.contains("  "):
+		string = string.replace("  ", " ")
+	return string
 
 # Meant to be accessed via signal from System Manager.
 func sendWord(wordList : String) -> void:
