@@ -48,5 +48,5 @@ func shiftText() -> void:
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
 	print("Shifted Text: ", shiftedText)
-	GlobalActiveList.ActiveList = shiftedText
+	GlobalActiveList.KnownText = shiftedText
 	pass

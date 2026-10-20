@@ -34,6 +34,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	
 func onTextUpdated() -> void:
 	print("Full String: ", currentInput)
+	GlobalActiveList.PlayerText = currentInput
 	# Here you would check current_player_input against your target word!
 
 
@@ -42,13 +43,13 @@ func _ready() -> void:
 	repeatTimer.wait_time = repeatCharTimeMS/1000
 	startTimer.wait_time = beginRepeatingTimeMS/1000
 
+# Handles repeated backspacing start delay
 func onStartTimerTimeout() -> void:
-	print("Start Timer Ended")
 	backspaceText()
 	repeatTimer.start()
 	pass # Replace with function body.
 
-
+# Handles repeated backspacing rate
 func onRepeatTimerTimeout() -> void:
 	if currentInput.length() > 0:
 		backspaceText()
