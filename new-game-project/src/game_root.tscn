@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bdfjwhunihcdw" path="res://src/dictionary/dictionary_system.tscn" id="2_g3w2m"]
 [ext_resource type="PackedScene" uid="uid://1o4xuqdi40u6" path="res://src/modifiers/modifier_handler.tscn" id="3_g3w2m"]
 [ext_resource type="PackedScene" uid="uid://cu2v7qsj8wd4g" path="res://src/Scenes/shift_modifier.tscn" id="4_qklge"]
+[ext_resource type="PackedScene" uid="uid://dgp6x73y6glnr" path="res://src/Scenes/input_parser.tscn" id="4_ysr3r"]
+[ext_resource type="Script" uid="uid://c87wputawshem" path="res://src/HUDManager.gd" id="6_r6ny6"]
+[ext_resource type="PackedScene" uid="uid://bwi1yusykbeaq" path="res://src/UI/Scenes/background.tscn" id="7_u4b5u"]
 
 [node name="GameRoot" type="Node" unique_id=761752279]
 process_mode = 3
@@ -12,6 +15,7 @@ process_mode = 3
 script = ExtResource("1_65u1q")
 DictionaryParserScene = ExtResource("2_g3w2m")
 ModifierHandlerScene = ExtResource("3_g3w2m")
+InputParserScene = ExtResource("4_ysr3r")
 ShiftModifierScene = ExtResource("4_qklge")
 
 [node name="WorldRoot" type="Node2D" parent="." unique_id=286303619]
@@ -24,6 +28,8 @@ process_mode = 1
 [node name="GameHUDLayer" type="CanvasLayer" parent="." unique_id=2141750988]
 process_mode = 1
 layer = 10
+script = ExtResource("6_r6ny6")
+BackgroundScene = ExtResource("7_u4b5u")
 
 [node name="GameHUDRoot" type="Control" parent="GameHUDLayer" unique_id=1234136111]
 layout_mode = 3

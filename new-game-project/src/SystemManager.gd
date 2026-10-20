@@ -3,6 +3,7 @@ extends Node
 #All High Level Systems
 @export var DictionaryParserScene : PackedScene
 @export var ModifierHandlerScene : PackedScene
+@export var InputParserScene : PackedScene
 
 #Testing Only
 @export var ShiftModifierScene : PackedScene
@@ -14,6 +15,9 @@ func _ready() -> void:
 	add_child(DictionaryParser)
 	var ModifierHandler : Node = ModifierHandlerScene.instantiate()
 	add_child(ModifierHandler)
+	var InputParser : Node = InputParserScene.instantiate()
+	add_child(InputParser)
+
 
 	#Testing Only
 	var ShiftModifier : Node = ShiftModifierScene.instantiate()

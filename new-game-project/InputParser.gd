@@ -9,6 +9,8 @@ var currentInput : String = ""
 @onready var repeatTimer : Timer = $RepeatTimer
 @onready var startTimer : Timer = $StartTimer
 
+signal updatedText()
+
 func backspaceText() -> void:
 	currentInput = currentInput.left(currentInput.length() - 1)
 	onTextUpdated()
@@ -35,6 +37,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func onTextUpdated() -> void:
 	print("Full String: ", currentInput)
 	GlobalActiveList.PlayerText = currentInput
+	updatedText.emit()
 	# Here you would check current_player_input against your target word!
 
 
@@ -42,6 +45,7 @@ func onTextUpdated() -> void:
 func _ready() -> void:
 	repeatTimer.wait_time = repeatCharTimeMS/1000
 	startTimer.wait_time = beginRepeatingTimeMS/1000
+	updatedText.connect(GlobalActiveList.PlayerTextUpdate)
 
 # Handles repeated backspacing start delay
 func onStartTimerTimeout() -> void:

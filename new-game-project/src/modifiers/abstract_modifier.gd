@@ -33,12 +33,6 @@ func updateKnownText(text : String) -> void:
 
 func textToWordArray(text : String) -> PackedStringArray:
 	return text.split(" ")
-
-"""	var knownTextArray : PackedStringArray = textToWordArray(knownText)
-	randomize()
-	var randomWordIndex : int = randi() % knownTextArray.size()
-	var randomWord : String = knownTextArray[randomWordIndex]
-	knownTextArray.remove_at(randomWordIndex)"""
 	
 ## Should most likely have randomize() called beforehand.
 func randomIndex(array : Array) -> int:

@@ -14,10 +14,22 @@ var PlayerText : String = ""
 ## All text, post modifier.
 var KnownText : String = ""
 
+var _lastPlayerText : String = ""
+var _lastKnownText : String = ""
+
+func PlayerTextUpdate() -> void:
+	print(ActiveList)
+	pass
+
 func _ready() -> void:
 	pass
 
-#TO-DO
 func _process(_delta: float) -> void:
+	if PlayerText == _lastPlayerText and KnownText == _lastKnownText:
+		return
+
+	_lastPlayerText = PlayerText
+	_lastKnownText = KnownText
+
 	if KnownText.begins_with(PlayerText):
-		pass
+		ActiveList = KnownText.substr(PlayerText.length())
