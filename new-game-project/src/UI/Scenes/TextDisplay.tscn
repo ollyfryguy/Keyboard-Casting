@@ -15,3 +15,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 140
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=1530934133]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer" unique_id=446744205]
+layout_mode = 2
+fit_content = true
