@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Keyboard Casting"
+config/version="0.1.0 PROTO"
 run/main_scene="uid://n522hlur74eg"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=120
@@ -32,6 +33,7 @@ window/size/window_width_override=1300
 window/size/window_height_override=740
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=0
 
 [gui]
 

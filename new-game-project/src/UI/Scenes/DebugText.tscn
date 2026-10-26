@@ -1,17 +1,24 @@
 [gd_scene format=3 uid="uid://dirugc5d2d5ts"]
 
-[node name="Control" type="Control" unique_id=530217797]
+[ext_resource type="Script" uid="uid://p52w1cgbu2md" path="res://src/UI/Scenes/DebugTextOverlay.gd" id="1_x4d8l"]
+
+[node name="DebugText" type="Control" unique_id=530217797]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_x4d8l")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=175202913]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -62.0
+offset_bottom = 77.0
+grow_horizontal = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2015099450]
 layout_mode = 2
