@@ -40,5 +40,11 @@ func _process(_delta: float) -> void:
 	_lastPlayerText = PlayerText
 	_lastKnownText = KnownText
 
+	var commonLength := 0
+	while commonLength < KnownText.length() and commonLength < PlayerText.length() and KnownText.substr(commonLength, 1) == PlayerText.substr(commonLength, 1):
+		commonLength += 1
+	UsedList = KnownText.substr(0, commonLength).strip_edges(false, true)
+
 	if KnownText.begins_with(PlayerText):
+		print(UsedList)
 		ActiveList = KnownText.substr(PlayerText.length())
