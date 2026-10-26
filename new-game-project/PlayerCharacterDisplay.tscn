@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://ovx7gkd4linh"]
+
+[ext_resource type="Script" uid="uid://ccis422txuda8" path="res://InputCharacterDisplay.gd" id="1_2dhmo"]
+
+[node name="CharacterDisplay" type="Control" unique_id=1011784047]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2dhmo")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=573434720]
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 250
+theme_override_constants/margin_top = 270
+theme_override_constants/margin_right = 250
+theme_override_constants/margin_bottom = 30
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" unique_id=728020870]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer" unique_id=519778265]
+layout_mode = 2

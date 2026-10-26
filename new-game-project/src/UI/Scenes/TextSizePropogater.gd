@@ -13,5 +13,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	textLabel.text = GlobalActiveList.ActiveList
+
+	textLabel.text = str(grayOutText(GlobalActiveList.UsedList), GlobalActiveList.ActiveList)
 	pass
+
+
+func escapeBBCode(text: String) -> String:
+	text = text.replace("[", "[lb]")
+	text = text.replace("]", "[rb]")
+	return text
+
+func grayOutText(text : String) -> String:
+	text = escapeBBCode(text)
+	return "[color=gray]%s[/color]" % text

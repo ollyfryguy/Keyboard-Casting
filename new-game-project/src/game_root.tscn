@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bwi1yusykbeaq" path="res://src/UI/Scenes/Background.tscn" id="7_u4b5u"]
 [ext_resource type="PackedScene" uid="uid://dhn80q08u3a5y" path="res://src/UI/Scenes/TextDisplay.tscn" id="9_kbwrr"]
 [ext_resource type="PackedScene" uid="uid://dirugc5d2d5ts" path="res://src/UI/Scenes/DebugText.tscn" id="10_bbsdl"]
+[ext_resource type="PackedScene" uid="uid://ovx7gkd4linh" path="res://PlayerCharacterDisplay.tscn" id="10_ovib7"]
 
 [node name="GameRoot" type="Node" unique_id=761752279]
 process_mode = 3
@@ -43,6 +44,9 @@ grow_vertical = 2
 script = ExtResource("6_r6ny6")
 BackgroundScene = ExtResource("7_u4b5u")
 TextDisplayScene = ExtResource("9_kbwrr")
+
+[node name="CharacterDisplay" parent="GameHUDLayer/GameHUDRoot" unique_id=1011784047 instance=ExtResource("10_ovib7")]
+layout_mode = 1
 
 [node name="TraversalLayer" type="CanvasLayer" parent="." unique_id=981168921]
 process_mode = 1

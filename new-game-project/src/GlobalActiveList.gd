@@ -31,7 +31,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	
-	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate()
+	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate(). Probably.
 	
 	# If no change has been made to either text, return.
 	if PlayerText == _lastPlayerText and KnownText == _lastKnownText:
@@ -40,10 +40,10 @@ func _process(_delta: float) -> void:
 	_lastPlayerText = PlayerText
 	_lastKnownText = KnownText
 
-	var commonLength := 0
-	while commonLength < KnownText.length() and commonLength < PlayerText.length() and KnownText.substr(commonLength, 1) == PlayerText.substr(commonLength, 1):
-		commonLength += 1
-	UsedList = KnownText.substr(0, commonLength).strip_edges(false, true)
+	var sharedLength := 0
+	while sharedLength < KnownText.length() and sharedLength < PlayerText.length() and KnownText.substr(sharedLength, 1) == PlayerText.substr(sharedLength, 1):
+		sharedLength += 1
+	UsedList = KnownText.substr(0, sharedLength)
 
 	if KnownText.begins_with(PlayerText):
 		print(UsedList)
