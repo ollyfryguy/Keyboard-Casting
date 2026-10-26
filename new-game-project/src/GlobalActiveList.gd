@@ -1,9 +1,14 @@
 extends Node
 
-## The Active List is the String containing the difference between the known text and the player text.
-## When PlayerText is empty, this is equal to [member KnownText]
+## The Active List is the String containing the difference between [member KnownText] and [member PlayerText].
+## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown" ActiveList is "Fox"
 var ActiveList : String = ""
+
 var ActiveListArray : PackedStringArray = []
+
+## Opposite of [member KnownText]. Contains the similarities between [member KnownText] and [member PlayerText].
+## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown abc," UsedList is "The Brown"
+var UsedList : String = ""
 
 ## CURRENTLY UNUSED. The text prior to modification, usually right from the DictionaryParser
 var OriginalText : String = ""
@@ -18,13 +23,17 @@ var _lastPlayerText : String = ""
 var _lastKnownText : String = ""
 
 func PlayerTextUpdate() -> void:
-	print(ActiveList)
+	#print(ActiveList)
 	pass
 
 func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
+	
+	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate()
+	
+	# If no change has been made to either text, return.
 	if PlayerText == _lastPlayerText and KnownText == _lastKnownText:
 		return
 

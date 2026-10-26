@@ -30,4 +30,5 @@ layout_mode = 2
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/CenterContainer" unique_id=446744205]
 custom_maximum_size = Vector2(0, -1)
 layout_mode = 2
+text = "Please work"
 fit_content = true

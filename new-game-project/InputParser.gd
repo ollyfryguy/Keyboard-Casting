@@ -35,7 +35,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	
 	
 func onTextUpdated() -> void:
-	print("Full String: ", currentInput)
+	#print("Full String: ", currentInput)
 	GlobalActiveList.PlayerText = currentInput
 	updatedText.emit()
 	# Here you would check current_player_input against your target word!
