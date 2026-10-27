@@ -21,9 +21,29 @@ var KnownText : String = ""
 
 var _lastPlayerText : String = ""
 var _lastKnownText : String = ""
+var lastCompletedWord : String = ""
+
+#var regexPattern : String = "(?<=\\s)(\\w+)(?=\\s)"
+var regexPattern : String = "(\\w+)(?=\\s)"
+@onready var regex : RegEx = RegEx.create_from_string(regexPattern)
+
+signal LastWordUpdated()
+
+
+func LastCompletedWord() -> String:
+	"""
+	if lastCompletedWord != UsedList.get_slice(" ", UsedList.get_slice_count(" ") - 1):
+		lastCompletedWord = UsedList.get_slice(" ", UsedList.get_slice_count(" ") - 1)
+		return lastCompletedWord
+	return ""
+	"""
+	var allCompletedWords : Array = regex.search_all(UsedList)
+	if allCompletedWords.size() != 0:
+		return allCompletedWords[allCompletedWords.size() - 1].get_string(1)
+	else:
+		return ""
 
 func PlayerTextUpdate(_oldInput : String, _newInput : String) -> void:
-	#print(ActiveList)
 	pass
 
 func _ready() -> void:
@@ -31,6 +51,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	
+	#Inefficient, but unable to be abstracted directly out to PlayerTextUpdate
+	if lastCompletedWord != LastCompletedWord():
+		lastCompletedWord = LastCompletedWord()
+		print("Last Completed Word Updated")
+		LastWordUpdated.emit()
+
 	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate(). Probably.
 	
 	# If no change has been made to either text, return.
@@ -46,5 +72,4 @@ func _process(_delta: float) -> void:
 	UsedList = KnownText.substr(0, sharedLength)
 
 	if KnownText.begins_with(PlayerText):
-		print(UsedList)
 		ActiveList = KnownText.substr(PlayerText.length())
