@@ -8,6 +8,8 @@ extends Node
 #Testing Only
 @export var ShiftModifierScene : PackedScene
 
+signal propogateInputUpdate(oldText : String, newText : String)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -27,9 +29,13 @@ func _ready() -> void:
 	for child : Node in $ModifierHandler.get_children():
 		
 		$DictionarySystem.wordSendRequest.connect(child.updateKnownText)
+	
+	var GameHUDRoot : Node = get_node("../GameHUDLayer/GameHUDRoot")
+	propogateInputUpdate.connect(GameHUDRoot.propogateInputUpdate)
 
 
-func recieveTextUpdate() -> void:
+func recieveInputUpdate(oldText : String, newText : String) -> void:
+	propogateInputUpdate.emit(oldText, newText)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

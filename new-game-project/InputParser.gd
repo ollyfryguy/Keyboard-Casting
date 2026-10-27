@@ -9,7 +9,8 @@ var currentInput : String = ""
 @onready var repeatTimer : Timer = $RepeatTimer
 @onready var startTimer : Timer = $StartTimer
 
-signal updatedText()
+## Takes the old input before the update and the new input after the update as args.
+signal updatedText(oldInput : String, newInput : String)
 
 func backspaceText() -> void:
 	currentInput = currentInput.left(currentInput.length() - 1)
@@ -36,16 +37,17 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	
 func onTextUpdated() -> void:
 	#print("Full String: ", currentInput)
+	var oldInput : String = GlobalActiveList.PlayerText
 	GlobalActiveList.PlayerText = currentInput
-	updatedText.emit()
-	# Here you would check current_player_input against your target word!
-
+	updatedText.emit(oldInput, currentInput)
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	repeatTimer.wait_time = repeatCharTimeMS/1000
 	startTimer.wait_time = beginRepeatingTimeMS/1000
 	updatedText.connect(GlobalActiveList.PlayerTextUpdate)
+	updatedText.connect(get_parent().recieveInputUpdate)
 
 # Handles repeated backspacing start delay
 func onStartTimerTimeout() -> void:

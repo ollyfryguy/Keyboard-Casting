@@ -22,7 +22,7 @@ var KnownText : String = ""
 var _lastPlayerText : String = ""
 var _lastKnownText : String = ""
 
-func PlayerTextUpdate() -> void:
+func PlayerTextUpdate(_oldInput : String, _newInput : String) -> void:
 	#print(ActiveList)
 	pass
 
