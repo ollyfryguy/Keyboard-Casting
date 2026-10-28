@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://h8bqmo2hjt5"]
+
+[ext_resource type="Script" uid="uid://ckplocv83mwll" path="res://src/modifiers/shift_modifier_timer.gd" id="1_4u83e"]
+
+[node name="ShiftModifier" type="Node" unique_id=631748792]
+script = ExtResource("1_4u83e")
+shiftAmount = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=811131421]
+wait_time = 8.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

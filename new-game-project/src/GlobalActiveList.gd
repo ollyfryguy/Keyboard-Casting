@@ -28,7 +28,10 @@ var regexPattern : String = "(\\w+)(?=\\s)"
 @onready var regex : RegEx = RegEx.create_from_string(regexPattern)
 
 signal LastWordUpdated()
+signal FinishedLastWord()
 
+func TextFinishedCheck() -> void:
+	pass
 
 func LastCompletedWord() -> String:
 	"""

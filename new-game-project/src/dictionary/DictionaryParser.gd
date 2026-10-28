@@ -25,6 +25,7 @@ func _ready() -> void:
 	currentWords.append_array(getRandomWord(10))
 	formattedWordList = formatWordArray(currentWords)
 	wordSendRequest.emit(formattedWordList)
+	GlobalActiveList.KnownText = formattedWordList
 
 	#GlobalActiveList.ActiveListArray = currentWords
 	#GlobalActiveList.ActiveList = formatWordArray(currentWords)
