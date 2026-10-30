@@ -1,25 +1,25 @@
 extends Node
 
-#All High Level Systems
+signal propogateInputUpdate(oldText : String, newText : String)
+
+# All High Level Systems
 @export var DictionaryParserScene : PackedScene
 @export var ModifierHandlerScene : PackedScene
 @export var InputParserScene : PackedScene
 
-#Testing Only
+# Testing Only
 @export var ShiftModifierScene : PackedScene
 
-signal propogateInputUpdate(oldText : String, newText : String)
+@onready var DictionaryParser : Node = DictionaryParserScene.instantiate()
+@onready var ModifierHandler : Node = ModifierHandlerScene.instantiate()
+@onready var InputParser : Node = InputParserScene.instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-	var DictionaryParser : Node = DictionaryParserScene.instantiate()
 	add_child(DictionaryParser)
-	var ModifierHandler : Node = ModifierHandlerScene.instantiate()
 	add_child(ModifierHandler)
-	var InputParser : Node = InputParserScene.instantiate()
 	add_child(InputParser)
-
 
 	#Testing Only
 	var ShiftModifier : Node = ShiftModifierScene.instantiate()
@@ -36,8 +36,4 @@ func _ready() -> void:
 
 func recieveInputUpdate(oldText : String, newText : String) -> void:
 	propogateInputUpdate.emit(oldText, newText)
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
 	pass

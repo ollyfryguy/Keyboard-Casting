@@ -16,37 +16,36 @@ func connectInitialization() -> void:
 func shiftText() -> void:
 
 	
-	var knownTextArray : PackedStringArray = textToWordArray(knownText)
+	var _knownTextArray : PackedStringArray = textToWordArray(knownText)
 	randomize()
-	var randomWordIndex : int = randomIndex(knownTextArray)
+	var _randomWordIndex : int = randomIndex(_knownTextArray)
 	@warning_ignore("shadowed_variable_base_class")
-	var randomWord : String = knownTextArray[randomWordIndex]
-	knownTextArray.remove_at(randomWordIndex)
+	var _randomWord : String = _knownTextArray[_randomWordIndex]
+	_knownTextArray.remove_at(_randomWordIndex)
 
 
-	var characterArray : PackedStringArray
-	for index in randomWord.length():
-		var originalCharacter : String = randomWord[index]
-		var character : String = originalCharacter.to_lower()
-		if character == " ":
-			characterArray.append(originalCharacter)
-		elif alphabet.find(character) != -1:
-			var shiftedCharacter : String
-			if alphabet.find(character) != alphabet.size() - 1:
-				shiftedCharacter = alphabet.get(alphabet.find(character) + shiftAmount)
+	var _characterArray : PackedStringArray
+	for index in _randomWord.length():
+		var _originalCharacter : String = _randomWord[index]
+		var _character : String = _originalCharacter.to_lower()
+		if _character == " ":
+			_characterArray.append(_originalCharacter)
+		elif alphabet.find(_character) != -1:
+			var _shiftedCharacter : String
+			if alphabet.find(_character) != alphabet.size() - 1:
+				_shiftedCharacter = alphabet.get(alphabet.find(_character) + shiftAmount)
 			else: # Loop Back Around for Z
-				shiftedCharacter = alphabet.get(0)
-			if originalCharacter != character:
-				shiftedCharacter = shiftedCharacter.to_upper()
-			characterArray.append(shiftedCharacter)
+				_shiftedCharacter = alphabet.get(0)
+			if _originalCharacter != _character:
+				_shiftedCharacter = _shiftedCharacter.to_upper()
+			_characterArray.append(_shiftedCharacter)
 		else:
-			push_error("Couldn't find character; not in standard alphabet.")
+			push_error("Couldn't find _character; not in standard alphabet.")
 
-	knownTextArray.insert(randomWordIndex, "".join(characterArray))
-	var shiftedText : String = " ".join(knownTextArray)
+	_knownTextArray.insert(_randomWordIndex, "".join(_characterArray))
+	var shiftedText : String = " ".join(_knownTextArray)
 
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
 	print("Shifted Text: ", shiftedText)
 	GlobalActiveList.KnownText = shiftedText
-	pass

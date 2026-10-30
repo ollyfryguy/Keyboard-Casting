@@ -74,6 +74,7 @@ Extra Information:
 File names: snake_case
 Class names: PascalCase
 Node names: PascalCase
+Built-In Functions: snake_case
 Functions: camelCase
 Variables: camelCase
 Constants: CONSTANT_CASE

@@ -1,6 +1,10 @@
 extends Node
 
+## Takes the old input before the update and the new input after the update as args.
+signal updatedText(oldInput : String, newInput : String)
+
 var currentInput : String = ""
+
 ## Time in MS when another character will be added to the current input while holding the given button.
 @export var repeatCharTimeMS : float
 ## Time in MS when the repeat character timer starts.
@@ -9,12 +13,7 @@ var currentInput : String = ""
 @onready var repeatTimer : Timer = $RepeatTimer
 @onready var startTimer : Timer = $StartTimer
 
-## Takes the old input before the update and the new input after the update as args.
-signal updatedText(oldInput : String, newInput : String)
 
-func backspaceText() -> void:
-	currentInput = currentInput.left(currentInput.length() - 1)
-	onTextUpdated()
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and !event.is_echo():
@@ -25,22 +24,15 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			startTimer.stop()
 			repeatTimer.stop()
 	
-	var charCode: int = event.unicode
+	var _charCode: int = event.unicode
 	
 	#32 is space. Unicode characters below 32 are system commands.
-	if charCode >= 32:
-		currentInput += char(charCode)
+	if _charCode >= 32:
+		currentInput += char(_charCode)
 		onTextUpdated()
 		pass
 	pass
-	
-	
-func onTextUpdated() -> void:
-	#print("Full String: ", currentInput)
-	var oldInput : String = GlobalActiveList.PlayerText
-	GlobalActiveList.PlayerText = currentInput
-	updatedText.emit(oldInput, currentInput)
-	
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,14 +41,25 @@ func _ready() -> void:
 	updatedText.connect(GlobalActiveList.PlayerTextUpdate)
 	updatedText.connect(get_parent().recieveInputUpdate)
 
+
+func backspaceText() -> void:
+	currentInput = currentInput.left(currentInput.length() - 1)
+	onTextUpdated()
+
+
+func onTextUpdated() -> void:
+	#print("Full String: ", currentInput)
+	var _oldInput : String = GlobalActiveList.PlayerText
+	GlobalActiveList.PlayerText = currentInput
+	updatedText.emit(_oldInput, currentInput)
+
+
 # Handles repeated backspacing start delay
 func onStartTimerTimeout() -> void:
 	backspaceText()
 	repeatTimer.start()
-	pass # Replace with function body.
+
 
 # Handles repeated backspacing rate
 func onRepeatTimerTimeout() -> void:
-	if currentInput.length() > 0:
-		backspaceText()
-	pass # Replace with function body.
+	if currentInput.length() > 0: backspaceText()
