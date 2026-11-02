@@ -77,6 +77,7 @@ Node names: PascalCase
 Built-In Functions: snake_case
 Functions: camelCase
 Variables: camelCase
+Signals: camelCase
 Constants: CONSTANT_CASE
 Enum names: PascalCase
 Enum Members: CONSTANT_CASE

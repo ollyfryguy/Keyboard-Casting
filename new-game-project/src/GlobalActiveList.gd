@@ -1,7 +1,7 @@
 extends Node
 
-signal LastWordUpdated()
-signal FinishedLastWord()
+signal lastWordUpdated()
+signal finishedLastWord()
 
 ## The Active List is the String containing the difference between [member KnownText] and [member PlayerText].
 ## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown" ActiveList is "Fox"
@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 	if lastCompletedWord != LastCompletedWord():
 		lastCompletedWord = LastCompletedWord()
 		print("Last Completed Word Updated")
-		LastWordUpdated.emit()
+		lastWordUpdated.emit()
 
 	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate(). Probably.
 	

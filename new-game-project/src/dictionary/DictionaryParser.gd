@@ -1,6 +1,6 @@
 extends Node
 
-signal wordSendRequest(wordList : String)
+signal sentWordRequest(wordList : String)
 
 @export var dictionary : JSON
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 	# Test Case
 	currentWords.append_array(getRandomWord(10))
 	formattedWordList = formatWordArray(currentWords)
-	wordSendRequest.emit(formattedWordList)
+	sentWordRequest.emit(formattedWordList)
 	
 	#GlobalActiveList.KnownText = formattedWordList
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	#TEMP
-	wordSendRequest.emit(formattedWordList)
+	sentWordRequest.emit(formattedWordList)
 	pass
 
 
@@ -59,5 +59,5 @@ func formatWordArray(array: PackedStringArray) -> String:
 
 # Meant to be accessed via signal from System Manager.
 func sendWord(wordList : String) -> void:
-	wordSendRequest.emit(wordList)
+	sentWordRequest.emit(wordList)
 

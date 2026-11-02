@@ -1,6 +1,6 @@
 extends Node
 
-signal propogateInputUpdate(oldText : String, newText : String)
+signal propogatedInputUpdate(oldText : String, newText : String)
 
 # All High Level Systems
 @export var DictionaryParserScene : PackedScene
@@ -28,12 +28,12 @@ func _ready() -> void:
 
 	for child : Node in $ModifierHandler.get_children():
 		
-		$DictionarySystem.wordSendRequest.connect(child.updateKnownText)
+		$DictionarySystem.sentWordRequest.connect(child.updateKnownText)
 	
 	var GameHUDRoot : Node = get_node("../GameHUDLayer/GameHUDRoot")
-	propogateInputUpdate.connect(GameHUDRoot.propogateInputUpdate)
+	propogatedInputUpdate.connect(GameHUDRoot.propogatedInputUpdate)
 
 
 func recieveInputUpdate(oldText : String, newText : String) -> void:
-	propogateInputUpdate.emit(oldText, newText)
+	propogatedInputUpdate.emit(oldText, newText)
 	pass
