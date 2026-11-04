@@ -16,7 +16,7 @@ func connectInitialization() -> void:
 func shiftText() -> void:
 
 	
-	var _knownTextArray : PackedStringArray = textToWordArray(knownText)
+	var _knownTextArray : PackedStringArray = _textToWordArray(knownText)
 	randomize()
 	var _randomWordIndex : int = randomIndex(_knownTextArray)
 	@warning_ignore("shadowed_variable_base_class")
@@ -48,7 +48,7 @@ func shiftText() -> void:
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
 	print("Shifted Text: ", shiftedText)
-	GlobalActiveList.KnownText = shiftedText
+	_sendRequestModification(shiftedText)
 
 
 func _onTimerTimeout() -> void:

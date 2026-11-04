@@ -28,10 +28,10 @@ func _ready() -> void:
 
 	for child : Node in $ModifierHandler.get_children():
 		
-		$DictionarySystem.sentWordRequest.connect(child.updateKnownText)
+		$DictionarySystem.sentWordRequest.connect(child._updateKnownText)
 	
 	var GameHUDRoot : Node = get_node("../GameHUDLayer/GameHUDRoot")
-	propogatedInputUpdate.connect(GameHUDRoot.propogatedInputUpdate)
+	propogatedInputUpdate.connect(GameHUDRoot.propogateInputUpdate)
 
 
 func recieveInputUpdate(oldText : String, newText : String) -> void:

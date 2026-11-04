@@ -1,6 +1,7 @@
 @abstract
 class_name AbstractModifier extends Node
 
+## Represents all text available from the modifier to chose from. Almost always equals [member GlobalActiveList.ActiveList]
 var knownText : String = ""
 var initializedFlag : bool = false
 
@@ -10,6 +11,7 @@ var alphabet : PackedStringArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i",
 @export var activateOrder : int
 
 signal initialized()
+signal requestedModification(modifiedText : String)
 
 @abstract
 func connectInitialization() -> void
@@ -18,20 +20,30 @@ func connectInitialization() -> void
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	var _parentNode : Node = get_parent()
 	set_process(true)
-	pass
+	if (_parentNode != null):
+		requestedModification.connect(_parentNode.handleModifyRequest)
+
 
 func _process(_delta: float) -> void:
+
+	_updateKnownText(GlobalActiveList.ActiveList)
+
 	if (initializedFlag == false):
 		if knownText != "":
 			initializedFlag = true
 			initialized.emit()
 	pass
 
-func updateKnownText(text : String) -> void:
+
+func _sendRequestModification(modifiedText : String) -> void:
+	requestedModification.emit(modifiedText)
+
+func _updateKnownText(text : String) -> void:
 	knownText = text
 
-func textToWordArray(text : String) -> PackedStringArray:
+func _textToWordArray(text : String) -> PackedStringArray:
 	return text.split(" ")
 	
 ## Should most likely have randomize() called beforehand.
