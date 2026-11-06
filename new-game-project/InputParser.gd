@@ -2,10 +2,8 @@ extends Node
 
 ## Takes the old input before the update and the new input after the update as args.
 signal updatedText(oldInput : String, newInput : String)
-signal resetRequestSent()
 
 var currentInput : String = ""
-var inputLocked : bool = false
 
 ## Time in MS when another character will be added to the current input while holding the given button.
 @export var repeatCharTimeMS : float
@@ -15,28 +13,25 @@ var inputLocked : bool = false
 @onready var repeatTimer : Timer = $RepeatTimer
 @onready var startTimer : Timer = $StartTimer
 
+
+
 func _unhandled_key_input(event: InputEvent) -> void:
-	if inputLocked != true:
-		if event is InputEventKey and event.pressed and !event.is_echo():	
-			if event.keycode == Key.KEY_BACKSPACE and currentInput.length() > 0:
-				startTimer.start()
-				backspaceText()
-		if event is InputEventKey and !event.pressed and event.keycode == Key.KEY_BACKSPACE:
-				startTimer.stop()
-				repeatTimer.stop()
-		
-		var _charCode: int = event.unicode
-		
-		#32 is space. Unicode characters below 32 are system commands.
-		if _charCode >= 32:
-			currentInput += char(_charCode)
-			onTextUpdated()
-			pass
+	if event is InputEventKey and event.pressed and !event.is_echo():
+		if event.keycode == Key.KEY_BACKSPACE and currentInput.length() > 0:
+			startTimer.start()
+			backspaceText()
+	if event is InputEventKey and !event.pressed and event.keycode == Key.KEY_BACKSPACE:
+			startTimer.stop()
+			repeatTimer.stop()
+	
+	var _charCode: int = event.unicode
+	
+	#32 is space. Unicode characters below 32 are system commands.
+	if _charCode >= 32:
+		currentInput += char(_charCode)
+		onTextUpdated()
 		pass
-	else:
-		if event is InputEventKey and event.pressed and !event.is_echo():
-			if event.keycode == Key.KEY_KP_ENTER or event.keycode == Key.KEY_ENTER:
-				sendResetRequest()
+	pass
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,8 +40,6 @@ func _ready() -> void:
 	startTimer.wait_time = beginRepeatingTimeMS/1000
 	updatedText.connect(GlobalActiveList.PlayerTextUpdate)
 	updatedText.connect(get_parent().recieveInputUpdate)
-	GlobalActiveList.finishedLastWordQueried.connect(TextCompleted)
-	
 
 
 func backspaceText() -> void:
@@ -70,15 +63,3 @@ func onStartTimerTimeout() -> void:
 # Handles repeated backspacing rate
 func onRepeatTimerTimeout() -> void:
 	if currentInput.length() > 0: backspaceText()
-
-
-func TextCompleted(status : bool) -> void:
-	inputLocked = status
-	pass
-	
-
-func sendResetRequest() -> void:
-	print("Sent Reset Request")
-	currentInput = ""
-	resetRequestSent.emit()
-	pass

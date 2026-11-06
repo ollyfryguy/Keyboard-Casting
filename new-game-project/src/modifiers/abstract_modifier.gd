@@ -23,7 +23,6 @@ func _ready() -> void:
 	var _parentNode : Node = get_parent()
 	set_process(true)
 	if (_parentNode != null):
-		print("Connected Request Modification")
 		requestedModification.connect(_parentNode.handleModifyRequest)
 
 

@@ -32,9 +32,6 @@ func _ready() -> void:
 	
 	var GameHUDRoot : Node = get_node("../GameHUDLayer/GameHUDRoot")
 	propogatedInputUpdate.connect(GameHUDRoot.propogateInputUpdate)
-	var CharacterDisplay : Node = get_node("../GameHUDLayer/GameHUDRoot/CharacterDisplay")
-	InputParser.resetRequestSent.connect(CharacterDisplay.resetText)
-	InputParser.resetRequestSent.connect(DictionaryParser.ResetText)
 
 
 func recieveInputUpdate(oldText : String, newText : String) -> void:

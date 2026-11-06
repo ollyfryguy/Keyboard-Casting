@@ -1,7 +1,6 @@
 extends Node
 
 signal sentWordRequest(wordList : String)
-signal resetText()
 
 @export var dictionary : JSON
 
@@ -61,10 +60,3 @@ func formatWordArray(array: PackedStringArray) -> String:
 func sendWord(wordList : String) -> void:
 	sentWordRequest.emit(wordList)
 
-func ResetText() -> void:
-	currentWords = []
-	currentWords.append_array(getRandomWord(10))
-	formattedWordList = formatWordArray(currentWords)
-	GlobalActiveList.PlayerText = ""
-	sentWordRequest.emit(formattedWordList)
-	GlobalActiveList.KnownText = formattedWordList

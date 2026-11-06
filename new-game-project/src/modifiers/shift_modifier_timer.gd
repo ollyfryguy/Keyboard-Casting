@@ -5,7 +5,6 @@ extends AbstractModifier
 # _ready handled by abstract modifier
 func _ready() -> void:
 	$Timer.start(10)
-	super._ready()
 
 
 
