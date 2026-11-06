@@ -22,4 +22,3 @@ func _ready() -> void:
 
 func propogateInputUpdate(oldText : String, newText : String) -> void:
 	propogatedInputUpdate.emit(oldText, newText)
-

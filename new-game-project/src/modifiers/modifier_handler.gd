@@ -6,13 +6,10 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func handleModifyRequest(modifiedText : String) -> void:
 	var indexToModify : int = GlobalActiveList.UsedList.length() + 1
-	var textToModify : String = GlobalActiveList.KnownText.right(indexToModify)
-	GlobalActiveList.KnownText = GlobalActiveList.KnownText.replace(textToModify, modifiedText)
+	var modificationLength : int = modifiedText.length()
+	var erasedString : String = GlobalActiveList.KnownText.erase(indexToModify - 1, modificationLength)
+	var modifiedString : String = erasedString.insert(indexToModify, modifiedText)
+	GlobalActiveList.KnownText = modifiedString
 	pass

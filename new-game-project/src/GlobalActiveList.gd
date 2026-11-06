@@ -1,7 +1,7 @@
 extends Node
 
 signal lastWordUpdated()
-signal finishedLastWord()
+signal finishedLastWordQueried(status : bool)
 
 ## The Active List is the String containing the difference between [member KnownText] and [member PlayerText].
 ## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown" ActiveList is "Fox"
@@ -9,7 +9,7 @@ var ActiveList : String = ""
 
 var ActiveListArray : PackedStringArray = []
 
-## Opposite of [member KnownText]. Contains the similarities between [member KnownText] and [member PlayerText].
+## Opposite of [member ActiveList]. Contains the similarities between [member KnownText] and [member PlayerText].
 ## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown abc," UsedList is "The Brown"
 var UsedList : String = ""
 
@@ -30,17 +30,19 @@ var lastCompletedWord : String = ""
 var regexPattern : String = "(\\w+)(?=\\s)"
 @onready var regex : RegEx = RegEx.create_from_string(regexPattern)
 
-
+var finishedText : bool = false
 
 func _process(_delta: float) -> void:
 	
-	#Inefficient, but unable to be abstracted directly out to PlayerTextUpdate
+	#Inefficient, but unable to be abstracted directly out to PlayerTextUpdate without changes
 	if lastCompletedWord != LastCompletedWord():
 		lastCompletedWord = LastCompletedWord()
 		print("Last Completed Word Updated")
 		lastWordUpdated.emit()
 
-	#TO-DO; Can be abstracted out of process to run in PlayerTextUpdate(). Probably.
+	
+	if TextFinishedCheck() == true:
+		finishedText = true
 	
 	# If no change has been made to either text, return.
 	if PlayerText == lastPlayerText and KnownText == lastKnownText:
@@ -58,17 +60,17 @@ func _process(_delta: float) -> void:
 		ActiveList = KnownText.substr(PlayerText.length())
 
 
-func TextFinishedCheck() -> void:
-	pass
+func TextFinishedCheck() -> bool:
+	if (ActiveList.length() == 0 and 
+	KnownText.length() != 0 and 
+	UsedList.length() >= KnownText.length()):
+		finishedLastWordQueried.emit(true)
+		return true
+	finishedLastWordQueried.emit(false)
+	return false
 
 
 func LastCompletedWord() -> String:
-	"""
-	if lastCompletedWord != UsedList.get_slice(" ", UsedList.get_slice_count(" ") - 1):
-		lastCompletedWord = UsedList.get_slice(" ", UsedList.get_slice_count(" ") - 1)
-		return lastCompletedWord
-	return ""
-	"""
 	var allCompletedWords : Array = regex.search_all(UsedList)
 	if allCompletedWords.size() != 0:
 		return allCompletedWords[allCompletedWords.size() - 1].get_string(1)
@@ -78,5 +80,3 @@ func LastCompletedWord() -> String:
 
 func PlayerTextUpdate(_oldInput : String, _newInput : String) -> void:
 	pass
-
-
