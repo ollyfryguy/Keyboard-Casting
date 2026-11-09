@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://1o4xuqdi40u6"]
 
 [ext_resource type="Script" uid="uid://q56hv80cuicj" path="res://src/modifiers/modifier_handler.gd" id="1_xxdbc"]
+[ext_resource type="PackedScene" uid="uid://cu2v7qsj8wd4g" path="res://src/Scenes/shift_modifier.tscn" id="2_oxvyk"]
 
 [node name="ModifierHandler" type="Node" unique_id=1237030266]
 script = ExtResource("1_xxdbc")
+ShiftModifierScene = ExtResource("2_oxvyk")
