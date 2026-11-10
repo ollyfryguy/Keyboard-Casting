@@ -1,6 +1,7 @@
 extends Node
 
 signal debugModeToggled(status : bool)
+signal requestedModifierCreation()
 
 var debugModeToggle : bool = false
 
@@ -14,6 +15,13 @@ func _process(delta: float) -> void:
 	pass
 
 
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.keycode == Key.KEY_CTRL and event.is_pressed() and !event.is_echo() and debugModeToggle == true:
+		requestedModifierCreation.emit()
+
+
 func toggleDebugMode(status : bool) -> void:
 	debugModeToggle = status
 	debugModeToggled.emit(debugModeToggle)
+

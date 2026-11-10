@@ -23,12 +23,12 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			if event.keycode == Key.KEY_BACKSPACE and currentInput.length() > 0:
 				startTimer.start()
 				backspaceText()
-			if event.keycode == Key.KEY_PAGEUP and event.is_pressed() and !event.is_echo():
-				toggleDebugMode()
 		if event is InputEventKey and !event.pressed and event.keycode == Key.KEY_BACKSPACE:
 				startTimer.stop()
 				repeatTimer.stop()
-		
+		if event.keycode == Key.KEY_PAGEUP and event.is_pressed() and !event.is_echo():
+			toggleDebugMode()
+
 		var _charCode: int = event.unicode
 		
 		#32 is space. Unicode characters below 32 are system commands.

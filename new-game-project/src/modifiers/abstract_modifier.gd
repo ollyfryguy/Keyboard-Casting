@@ -13,6 +13,8 @@ var alphabet : PackedStringArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i",
 signal initialized()
 signal requestedModification(modifiedText : String)
 
+
+## Connect to method which modifies the text
 @abstract
 func connectInitialization() -> void
 
@@ -58,3 +60,7 @@ func randomWord(wordArray : PackedStringArray, isDestructive : bool) -> String:
 	if isDestructive:
 		wordArray.remove_at(randomWordIndex)
 	return word
+
+func destroySelf() -> void:
+	queue_free()
+

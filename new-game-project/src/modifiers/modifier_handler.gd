@@ -2,17 +2,17 @@ extends Node
 
 @export var ShiftModifierScene : PackedScene
 
-@onready var ShiftModifier : Node = ShiftModifierScene.instantiate()
+var ShiftModifier : Node
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	DebugMode.requestedModifierCreation.connect(createModifier)
 
 
 ## Should be called by entities only.
 func createModifier() -> void:
-	# Testing Only
+	ShiftModifier = ShiftModifierScene.instantiate()
 	add_child(ShiftModifier)
 	pass
 
