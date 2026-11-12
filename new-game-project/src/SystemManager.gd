@@ -7,8 +7,6 @@ signal propogatedInputUpdate(oldText : String, newText : String)
 @export var ModifierHandlerScene : PackedScene
 @export var InputParserScene : PackedScene
 
-# Testing Only
-@export var ShiftModifierScene : PackedScene
 
 @onready var DictionaryParser : Node = DictionaryParserScene.instantiate()
 @onready var ModifierHandler : Node = ModifierHandlerScene.instantiate()
@@ -20,11 +18,6 @@ func _ready() -> void:
 	add_child(DictionaryParser)
 	add_child(ModifierHandler)
 	add_child(InputParser)
-
-	#Testing Only
-	var ShiftModifier : Node = ShiftModifierScene.instantiate()
-	ModifierHandler.add_child(ShiftModifier)
-	pass # Replace with function body.
 
 	for child : Node in $ModifierHandler.get_children():
 		
