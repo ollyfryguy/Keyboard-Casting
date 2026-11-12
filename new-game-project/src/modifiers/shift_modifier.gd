@@ -17,13 +17,11 @@ func connectInitialization() -> void:
 
 func shiftText() -> void:
 
-	
 	var _knownTextArray : PackedStringArray = _textToWordArray(knownText)
-	var _randomWordIndex : int = randomIndex(_knownTextArray)
-	@warning_ignore("shadowed_variable_base_class")
-	var _randomWord : String = _knownTextArray[_randomWordIndex]
+	var wordDictionary : Dictionary = randomWordMap(_knownTextArray)
+	var _randomWord : String = wordDictionary.keys().get(0)
+	var _randomWordIndex : int = wordDictionary.values().get(0)
 	_knownTextArray.remove_at(_randomWordIndex)
-
 
 	var _characterArray : PackedStringArray
 	for index in _randomWord.length():

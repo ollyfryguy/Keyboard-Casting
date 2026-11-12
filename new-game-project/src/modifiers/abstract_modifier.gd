@@ -52,14 +52,16 @@ func _textToWordArray(text : String) -> PackedStringArray:
 ## Should most likely have randomize() called beforehand.
 func randomIndex(array : Array) -> int:
 	return randi() % array.size()
-	
-## if isDestructive is true, chosen word will also be removed from the array.
-func randomWord(wordArray : PackedStringArray, isDestructive : bool) -> String:
+
+## Generally, `wordArray` equals _textToWordArray(GlobalActiveList.ActiveList)
+## Dictionary returned has key equal to the word chosen and value equal to the index of the word chosen within the wordArray
+func randomWordMap(wordArray : PackedStringArray) -> Dictionary:
 	var randomWordIndex : int = randomIndex(wordArray)
 	var word : String = wordArray[randomWordIndex]
-	if isDestructive:
-		wordArray.remove_at(randomWordIndex)
-	return word
+	var dictionary : Dictionary = {
+		word : randomWordIndex
+	}
+	return dictionary
 
 func destroySelf() -> void:
 	queue_free()
