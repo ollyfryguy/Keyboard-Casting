@@ -33,10 +33,7 @@ func shiftText() -> void:
 			_characterArray.append(_originalCharacter)
 		elif alphabet.find(_character) != -1:
 			var _shiftedCharacter : String
-			if alphabet.find(_character) != alphabet.size() - 1:
-				_shiftedCharacter = alphabet.get((alphabet.find(_character) + shiftAmount) % alphabet.size())
-			else: # Loop Back Around for Z
-				_shiftedCharacter = alphabet.get(0)
+			_shiftedCharacter = alphabet.get((alphabet.find(_character) + shiftAmount) % alphabet.size())
 			if _originalCharacter != _character:
 				_shiftedCharacter = _shiftedCharacter.to_upper()
 			_characterArray.append(_shiftedCharacter)
