@@ -15,10 +15,21 @@ func _process(delta: float) -> void:
 	pass
 
 
+func _isInputValid(event : InputEvent) -> bool:
+	if event.is_pressed() and !event.is_echo():
+		return true
+	else:
+		return false
+
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.keycode == Key.KEY_CTRL and event.is_pressed() and !event.is_echo() and debugModeToggle == true:
-		requestedModifierCreation.emit()
+	if debugModeToggle == true:
+		if event.keycode == Key.KEY_CTRL and _isInputValid(event):
+			requestedModifierCreation.emit()
+		
+		if event.keycode == Key.KEY_HOME and _isInputValid(event):
+			GlobalActiveList.PlayerText = GlobalActiveList.KnownText
+
 
 
 func toggleDebugMode(status : bool) -> void:
