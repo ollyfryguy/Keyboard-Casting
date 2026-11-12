@@ -1,9 +1,11 @@
 extends AbstractModifier
 
-@export var shiftAmount : int
+var shiftAmount : int
 
 # _ready handled by abstract modifier
 func _ready() -> void:
+	randomize()
+	shiftAmount = randi_range(1,25)
 	connectInitialization()
 	super._ready()
 
@@ -17,7 +19,6 @@ func shiftText() -> void:
 
 	
 	var _knownTextArray : PackedStringArray = _textToWordArray(knownText)
-	randomize()
 	var _randomWordIndex : int = randomIndex(_knownTextArray)
 	@warning_ignore("shadowed_variable_base_class")
 	var _randomWord : String = _knownTextArray[_randomWordIndex]
@@ -33,7 +34,7 @@ func shiftText() -> void:
 		elif alphabet.find(_character) != -1:
 			var _shiftedCharacter : String
 			if alphabet.find(_character) != alphabet.size() - 1:
-				_shiftedCharacter = alphabet.get(alphabet.find(_character) + shiftAmount)
+				_shiftedCharacter = alphabet.get((alphabet.find(_character) + shiftAmount) % alphabet.size())
 			else: # Loop Back Around for Z
 				_shiftedCharacter = alphabet.get(0)
 			if _originalCharacter != _character:
@@ -48,4 +49,6 @@ func shiftText() -> void:
 	# DEBUG ONLY
 	print("Initial Text: ", knownText)
 	print("Shifted Text: ", shiftedText)
-	GlobalActiveList.KnownText = shiftedText
+	_sendRequestModification(shiftedText)
+	destroySelf()
+	

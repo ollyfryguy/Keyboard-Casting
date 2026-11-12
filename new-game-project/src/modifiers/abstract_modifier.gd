@@ -7,12 +7,14 @@ var initializedFlag : bool = false
 
 var alphabet : PackedStringArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-# The order in which modifiers activate. Handeled by SystemManager in cases of ties. 0 is first.
+# The order in which modifiers activate. Handeled by ModifierHandler in cases of ties. 0 is first.
 @export var activateOrder : int
 
 signal initialized()
 signal requestedModification(modifiedText : String)
 
+
+## Connect to method which modifies the text
 @abstract
 func connectInitialization() -> void
 
@@ -58,3 +60,7 @@ func randomWord(wordArray : PackedStringArray, isDestructive : bool) -> String:
 	if isDestructive:
 		wordArray.remove_at(randomWordIndex)
 	return word
+
+func destroySelf() -> void:
+	queue_free()
+

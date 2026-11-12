@@ -3,9 +3,11 @@ extends Node
 ## Takes the old input before the update and the new input after the update as args.
 signal updatedText(oldInput : String, newInput : String)
 signal resetRequestSent()
+signal debugModeRequestSent(status : bool)
 
 var currentInput : String = ""
 var inputLocked : bool = false
+var debugModeToggle : bool = false
 
 ## Time in MS when another character will be added to the current input while holding the given button.
 @export var repeatCharTimeMS : float
@@ -24,7 +26,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event is InputEventKey and !event.pressed and event.keycode == Key.KEY_BACKSPACE:
 				startTimer.stop()
 				repeatTimer.stop()
-		
+		if event.keycode == Key.KEY_PAGEUP and event.is_pressed() and !event.is_echo():
+			toggleDebugMode()
+
 		var _charCode: int = event.unicode
 		
 		#32 is space. Unicode characters below 32 are system commands.
@@ -33,6 +37,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			onTextUpdated()
 			pass
 		pass
+
 	else:
 		if event is InputEventKey and event.pressed and !event.is_echo():
 			if event.keycode == Key.KEY_KP_ENTER or event.keycode == Key.KEY_ENTER:
@@ -45,8 +50,12 @@ func _ready() -> void:
 	startTimer.wait_time = beginRepeatingTimeMS/1000
 	updatedText.connect(GlobalActiveList.PlayerTextUpdate)
 	updatedText.connect(get_parent().recieveInputUpdate)
-	GlobalActiveList.finishedLastWordQueried.connect(TextCompleted)
-	
+	GlobalActiveList.finishedLastWordQueried.connect(textCompleted)
+	debugModeRequestSent.connect(DebugMode.toggleDebugMode)
+
+func toggleDebugMode() -> void:
+	debugModeToggle = not debugModeToggle
+	debugModeRequestSent.emit(debugModeToggle)
 
 
 func backspaceText() -> void:
@@ -72,7 +81,7 @@ func onRepeatTimerTimeout() -> void:
 	if currentInput.length() > 0: backspaceText()
 
 
-func TextCompleted(status : bool) -> void:
+func textCompleted(status : bool) -> void:
 	inputLocked = status
 	pass
 	
