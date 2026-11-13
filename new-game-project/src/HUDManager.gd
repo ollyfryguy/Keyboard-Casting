@@ -10,6 +10,8 @@ signal propogatedInputUpdate(oldText : String, newText : String)
 @onready var TextDisplay : Control = TextDisplayScene.instantiate()
 @onready var CharacterDisplay : Control = CharacterDisplayScene.instantiate()
 
+@onready var shader_material : ShaderMaterial = self.material
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -18,6 +20,8 @@ func _ready() -> void:
 	add_child(CharacterDisplay)
 
 	propogatedInputUpdate.connect(CharacterDisplay.recieveInputUpdate)
+	material.se
+	
 
 
 func propogateInputUpdate(oldText : String, newText : String) -> void:

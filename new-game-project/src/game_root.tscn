@@ -5,12 +5,40 @@
 [ext_resource type="PackedScene" uid="uid://bdfjwhunihcdw" path="res://src/dictionary/dictionary_system.tscn" id="2_g3w2m"]
 [ext_resource type="PackedScene" uid="uid://1o4xuqdi40u6" path="res://src/modifiers/modifier_handler.tscn" id="3_g3w2m"]
 [ext_resource type="PackedScene" uid="uid://dgp6x73y6glnr" path="res://src/Scenes/input_parser.tscn" id="4_ysr3r"]
-[ext_resource type="PackedScene" uid="uid://h8bqmo2hjt5" path="res://src/Scenes/shift_modifier_timer.tscn" id="6_ovib7"]
+[ext_resource type="Shader" uid="uid://cgbe6anp0jkc5" path="res://art/shaders/screen_shatter.gdshader" id="6_ovib7"]
 [ext_resource type="Script" uid="uid://c87wputawshem" path="res://src/HUDManager.gd" id="6_r6ny6"]
 [ext_resource type="PackedScene" uid="uid://bwi1yusykbeaq" path="res://src/UI/Scenes/Background.tscn" id="7_u4b5u"]
 [ext_resource type="PackedScene" uid="uid://dhn80q08u3a5y" path="res://src/UI/Scenes/TextDisplay.tscn" id="9_kbwrr"]
 [ext_resource type="PackedScene" uid="uid://dirugc5d2d5ts" path="res://src/UI/Scenes/DebugText.tscn" id="10_bbsdl"]
 [ext_resource type="PackedScene" uid="uid://ovx7gkd4linh" path="res://PlayerCharacterDisplay.tscn" id="10_ovib7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbsdl"]
+shader = ExtResource("6_ovib7")
+shader_parameter/fall_progress = 0.1550000073625
+shader_parameter/pieces_x = 9
+shader_parameter/pieces_y = 8
+shader_parameter/gravity = 0.0
+shader_parameter/scatter = 0.22
+shader_parameter/rotation_amount = 1.0
+shader_parameter/point_jitter = 0.34
+shader_parameter/delay_variation = 0.28
+shader_parameter/edge_thickness = 0.01
+shader_parameter/edge_brightness = 0.35
+shader_parameter/alpha_fade = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n6qjf"]
+shader = ExtResource("6_ovib7")
+shader_parameter/fall_progress = 0.210000009975
+shader_parameter/pieces_x = 5
+shader_parameter/pieces_y = 3
+shader_parameter/gravity = 2.2
+shader_parameter/scatter = 0.26000001235
+shader_parameter/rotation_amount = 1.0
+shader_parameter/point_jitter = 0.34
+shader_parameter/delay_variation = 0.28
+shader_parameter/edge_thickness = 0.01
+shader_parameter/edge_brightness = 0.35
+shader_parameter/alpha_fade = 0.0
 
 [node name="GameRoot" type="Node" unique_id=761752279]
 process_mode = 3
@@ -21,7 +49,6 @@ script = ExtResource("1_65u1q")
 DictionaryParserScene = ExtResource("2_g3w2m")
 ModifierHandlerScene = ExtResource("3_g3w2m")
 InputParserScene = ExtResource("4_ysr3r")
-ShiftModifierScene = ExtResource("6_ovib7")
 
 [node name="WorldRoot" type="Node2D" parent="." unique_id=286303619]
 process_mode = 1
@@ -35,6 +62,7 @@ process_mode = 1
 layer = 10
 
 [node name="GameHUDRoot" type="Control" parent="GameHUDLayer" unique_id=1234136111]
+material = SubResource("ShaderMaterial_bbsdl")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,6 +115,7 @@ process_mode = 3
 layer = 250
 
 [node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=118019566]
+material = SubResource("ShaderMaterial_n6qjf")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
