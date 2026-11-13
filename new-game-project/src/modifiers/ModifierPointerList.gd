@@ -8,4 +8,5 @@ var modifierArray : Array[PackedScene] = [
 @export var ShiftModifier : PackedScene
 
 func getRandomModifierRef() -> PackedScene:
+	randomize()
 	return modifierArray.pick_random()
