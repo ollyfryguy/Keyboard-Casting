@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c2uh7knsrjskr"]
+
+[ext_resource type="Script" uid="uid://duek7vagr565r" path="res://src/abilities/enemy/screen_shatter.gd" id="1_vykwx"]
+[ext_resource type="Shader" uid="uid://c8xfjoswjx2y3" path="res://art/shaders/screen_warp.gdshader" id="2_i8w0o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2yg3e"]
+shader = ExtResource("2_i8w0o")
+shader_parameter/warp_intensity = 0.030000001425
+shader_parameter/time_scale = 3.0000001392401203
+
+[node name="ScreenShatter" type="Node" unique_id=1648972097]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=329835924]
+material = SubResource("ShaderMaterial_2yg3e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_vykwx")
+tweenDuration = 1.0
+
+[node name="Timer" type="Timer" parent="ColorRect" unique_id=935144174]
+wait_time = 1.6999999999999997
+autostart = true
+
+[connection signal="timeout" from="ColorRect/Timer" to="ColorRect" method="_onTimerTimeout"]
