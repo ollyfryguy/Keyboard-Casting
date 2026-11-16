@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b75qsjkgad7uq"]
+
+[ext_resource type="Script" uid="uid://cllt1qhmxflot" path="res://src/Scenes/blackout_modifier.gd" id="1_tnbs1"]
+
+[node name="BlackoutModifier" type="Node" unique_id=1588574339]
+script = ExtResource("1_tnbs1")

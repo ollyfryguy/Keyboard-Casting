@@ -1,0 +1,40 @@
+extends AbstractModifier
+
+var errorHash : String = "arbitrary error code".sha256_text()
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	connectInitialization()
+	super._ready()
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func connectInitialization() -> void:
+	initialized.connect(blackoutText)
+
+func blackoutText() -> void:
+	var validWord : String = _findValidWord()
+	if validWord == errorHash:
+		print("hello?")
+		destroySelf()
+	print("Valid Word: " , validWord)
+	pass
+
+func _findValidWord() -> String:
+	var attemptIndex : int = 0
+	while attemptIndex >= 0 and attemptIndex < 10:
+		randomize()
+		var dictionary : Dictionary = randomWordMap(_textToWordArray(knownText))
+		var word : String = dictionary.find_key(0)
+		if TextDictionary.words.find(word) != -1:
+			return word
+		else:
+			attemptIndex += 1
+	push_warning("No valid word found for blackout modifier, aborting.")
+	return errorHash

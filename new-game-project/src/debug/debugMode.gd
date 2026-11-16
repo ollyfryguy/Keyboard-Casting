@@ -1,7 +1,7 @@
 extends Node
 
 signal debugModeToggled(status : bool)
-signal requestedModifierCreation()
+signal requestedModifierCreation(modifierName : String)
 
 var debugModeToggle : bool = false
 
@@ -25,7 +25,7 @@ func _isInputValid(event : InputEvent) -> bool:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if debugModeToggle == true:
 		if event.keycode == Key.KEY_CTRL and _isInputValid(event):
-			requestedModifierCreation.emit()
+			requestedModifierCreation.emit("BlackoutModifier")
 		
 		if event.keycode == Key.KEY_HOME and _isInputValid(event):
 			GlobalActiveList.PlayerText = GlobalActiveList.KnownText

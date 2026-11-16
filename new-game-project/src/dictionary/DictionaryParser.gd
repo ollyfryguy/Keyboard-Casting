@@ -21,6 +21,7 @@ func _ready() -> void:
 		var jsonData : Dictionary = _json.data
 		if typeof(jsonData) == TYPE_DICTIONARY:
 			words = jsonData.keys()
+			TextDictionary.updateWords(words)
 	else:
 		print("JSON Parse Error: ", _json.get_error_message(), " in ", JSON.stringify(dictionary), " at line ", _json.get_error_line())
 

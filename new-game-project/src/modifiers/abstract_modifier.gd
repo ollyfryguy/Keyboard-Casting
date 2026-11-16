@@ -53,7 +53,7 @@ func _textToWordArray(text : String) -> PackedStringArray:
 func randomIndex(array : Array) -> int:
 	return randi() % array.size()
 
-## Generally, `wordArray` equals _textToWordArray(GlobalActiveList.ActiveList)
+## Generally, `wordArray` equals _textToWordArray(knownText)
 ## Dictionary returned has key equal to the word chosen and value equal to the index of the word chosen within the wordArray
 func randomWordMap(wordArray : PackedStringArray) -> Dictionary:
 	var randomWordIndex : int = randomIndex(wordArray)
@@ -65,4 +65,3 @@ func randomWordMap(wordArray : PackedStringArray) -> Dictionary:
 
 func destroySelf() -> void:
 	queue_free()
-

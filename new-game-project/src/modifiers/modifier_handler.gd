@@ -1,9 +1,10 @@
 extends Node
 
 @export var ShiftModifierScene : PackedScene
+@export var BlackoutModifierScene : PackedScene
 
 var ShiftModifier : Node
-
+var BlackoutModifier : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,9 +12,14 @@ func _ready() -> void:
 
 
 ## Should be called by entities only.
-func createModifier() -> void:
-	ShiftModifier = ShiftModifierScene.instantiate()
-	add_child(ShiftModifier)
+func createModifier(modifierName : String) -> void:
+	if modifierName == "ShiftModifier":
+		ShiftModifier = ShiftModifierScene.instantiate()
+		add_child(ShiftModifier)
+	
+	if modifierName == "BlackoutModifier":
+		BlackoutModifier = BlackoutModifierScene.instantiate()
+		add_child(BlackoutModifier)
 	pass
 
 func handleModifyRequest(modifiedText : String) -> void:

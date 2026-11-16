@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 GlobalActiveList="*uid://goyr3bmuhc3d"
 DebugMode="*uid://d4airmtlkimsh"
 ModifierPointerList="*uid://bwn3kfxawrdwl"
+TextDictionary="*uid://d07ro72k7l3m4"
 
 [debug]
 
