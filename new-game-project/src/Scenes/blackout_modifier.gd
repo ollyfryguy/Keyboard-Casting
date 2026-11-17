@@ -10,20 +10,15 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func connectInitialization() -> void:
 	initialized.connect(blackoutText)
 
 func blackoutText() -> void:
 	var validWord : String = _findValidWord()
 	if validWord == errorHash:
-		print("hello?")
 		destroySelf()
-	print("Valid Word: " , validWord)
+	else:
+		print("Valid Word: " , validWord)
 	pass
 
 func _findValidWord() -> String:
@@ -31,9 +26,9 @@ func _findValidWord() -> String:
 	while attemptIndex >= 0 and attemptIndex < 10:
 		randomize()
 		var dictionary : Dictionary = randomWordMap(_textToWordArray(knownText))
-		var word : String = dictionary.find_key(0)
+		var word : String = dictionary.keys().get(0)
 		if TextDictionary.words.find(word) != -1:
-			return word
+			return str(word)
 		else:
 			attemptIndex += 1
 	push_warning("No valid word found for blackout modifier, aborting.")
