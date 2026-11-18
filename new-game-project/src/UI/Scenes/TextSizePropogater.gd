@@ -4,6 +4,8 @@ extends MarginContainer
 
 var textFinished : bool = false
 
+var tempFlag : bool = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,10 +18,15 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if textFinished == false:
-		textLabel.text = str(grayOutText(GlobalActiveList.UsedList), GlobalActiveList.ActiveList)
-	else:
+	if textFinished == false and GlobalActiveList.UsedList + GlobalActiveList.ActiveList == GlobalActiveList.KnownText:
+		textLabel.text = grayOutText(GlobalActiveList.UsedList) + GlobalActiveList.ActiveList
+		tempFlag = false
+	elif textFinished == true:
 		textLabel.text = redOutText(GlobalActiveList.KnownText)
+	elif GlobalActiveList.UsedList + GlobalActiveList.ActiveList != GlobalActiveList.KnownText:
+		if tempFlag != true:
+			push_error("UsedList + ActiveList != KnownText. Last character of UsedList equals '", GlobalActiveList.UsedList.right(1), "' and the first character of ActiveList equals '", GlobalActiveList.ActiveList.left(1), "'")
+			tempFlag = true
 
 func escapeBBCode(text: String) -> String:
 	text = text.replace("[", "[lb]")
@@ -35,6 +42,15 @@ func grayOutText(text : String) -> String:
 func redOutText(text : String) -> String:
 	text = escapeBBCode(text)
 	return "[color=red]%s[/color]" % text
-	
+
+## Valid colors are currently: Gray, Red
+func colorText(text : String, color : String) -> String:
+	color = color.to_lower()
+	if color == "gray" or color == "grey":
+		text = grayOutText(text)
+	elif color == "red":
+		text = redOutText(text)
+	return text
+
 func LastWordFinished(status : bool) -> void:
 	textFinished = status

@@ -29,6 +29,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		
 		if event.keycode == Key.KEY_HOME and _isInputValid(event):
 			GlobalActiveList.PlayerText = GlobalActiveList.KnownText
+		
+		if event.keycode == Key.KEY_PAGEDOWN and _isInputValid(event):
+			print("Known Text Array: ", GlobalActiveList.KnownTextArray)
 
 
 

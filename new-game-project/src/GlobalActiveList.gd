@@ -13,6 +13,8 @@ var ActiveListArray : PackedStringArray = []
 ## When [member KnownText] is "The Brown Fox" and [member PlayerText] is "The Brown abc," UsedList is "The Brown"
 var UsedList : String = ""
 
+var UsedListArray : PackedStringArray = []
+
 ## CURRENTLY UNUSED. The text prior to modification, usually right from the DictionaryParser
 var OriginalText : String = ""
 
@@ -21,6 +23,8 @@ var PlayerText : String = ""
 
 ## All text, post modifier.
 var KnownText : String = ""
+
+var KnownTextArray : PackedStringArray = []
 
 var lastPlayerText : String = ""
 var lastKnownText : String = ""
@@ -40,13 +44,12 @@ func _process(_delta: float) -> void:
 		print("Last Completed Word Updated")
 		lastWordUpdated.emit()
 
-	
 	if TextFinishedCheck() == true:
 		finishedText = true
-	
-	# If no change has been made to either text, return.
-	if PlayerText == lastPlayerText and KnownText == lastKnownText:
-		return
+
+	KnownTextArray = KnownText.split()
+	ActiveListArray = ActiveList.split()
+	UsedListArray = UsedList.split()
 
 	lastPlayerText = PlayerText
 	lastKnownText = KnownText
@@ -80,3 +83,12 @@ func LastCompletedWord() -> String:
 
 func PlayerTextUpdate(_oldInput : String, _newInput : String) -> void:
 	pass
+
+
+func _setActiveListArray(activeList : String) -> void:
+	ActiveListArray = activeList.split("")
+	pass
+
+
+func _setKnownTextArray(knownText : String) -> void:
+	KnownTextArray = knownText.split("")
