@@ -3,12 +3,14 @@ extends Node
 @export var ShiftModifierScene : PackedScene
 @export var BlackoutModifierScene : PackedScene
 
+
 var ShiftModifier : Node
 var BlackoutModifier : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	DebugMode.requestedModifierCreation.connect(createModifier)
+	#var TextDisplay : Node = get_node("%TextDisplay" + "/MarginContainer"); NOT WORKING; SEE ISSUE #6.
 
 
 ## Should be called by entities only.
@@ -28,4 +30,9 @@ func handleModifyRequest(modifiedText : String) -> void:
 	var erasedString : String = GlobalActiveList.KnownText.erase(indexToModify - 1, modificationLength)
 	var modifiedString : String = erasedString.insert(indexToModify, modifiedText)
 	GlobalActiveList.KnownText = modifiedString
+	pass
+
+
+func handleBlackoutRequest(characterIndices : PackedInt32Array) -> void:
+
 	pass

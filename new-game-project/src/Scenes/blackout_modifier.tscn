@@ -4,3 +4,11 @@
 
 [node name="BlackoutModifier" type="Node" unique_id=1588574339]
 script = ExtResource("1_tnbs1")
+
+[node name="BlackoutTimer" type="Timer" parent="." unique_id=151217229]
+wait_time = 0.25
+ignore_time_scale = true
+
+[node name="KillTimer" type="Timer" parent="." unique_id=937938041]
+wait_time = 6.5
+one_shot = true

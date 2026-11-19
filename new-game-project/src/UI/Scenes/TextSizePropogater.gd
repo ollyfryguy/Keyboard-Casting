@@ -52,5 +52,14 @@ func colorText(text : String, color : String) -> String:
 		text = redOutText(text)
 	return text
 
+
+func colorBackgroundText(text : String, color : String) -> String:
+	color = color.to_lower()
+	text = escapeBBCode(text)
+	if color == "black":
+		return "[background=black]%s[/background]"
+	push_warning("Color Background Text used without valid color chosen; returning unmodified text")
+	return text
+
 func LastWordFinished(status : bool) -> void:
 	textFinished = status

@@ -1,6 +1,8 @@
 extends AbstractModifier
 
 var errorHash : String = "arbitrary error code".sha256_text()
+@onready var blackoutTimer : Timer = $BlackoutTimer
+@onready var killTimer : Timer = $KillTimer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +20,12 @@ func blackoutText() -> void:
 	if validWord == errorHash:
 		destroySelf()
 	else:
-		print("Valid Word: " , validWord)
+		var startingIndex : int = GlobalActiveList.KnownText.find(validWord)
+		var arrayofIndexes : PackedInt32Array
+		for index in range(validWord.length()):
+			arrayofIndexes.append(startingIndex + index)
+		print(arrayofIndexes)
+		
 	pass
 
 func _findValidWord() -> String:
