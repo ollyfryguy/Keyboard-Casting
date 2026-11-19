@@ -61,6 +61,9 @@ func _process(_delta: float) -> void:
 
 	if KnownText.begins_with(PlayerText):
 		ActiveList = KnownText.substr(PlayerText.length())
+	
+	if UsedList + ActiveList != KnownText:
+		ActiveList = ActiveList.substr(1)
 
 
 func TextFinishedCheck() -> bool:
