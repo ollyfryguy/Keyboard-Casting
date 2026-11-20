@@ -36,6 +36,9 @@ DictionaryParserScene = ExtResource("2_g3w2m")
 ModifierHandlerScene = ExtResource("3_g3w2m")
 InputParserScene = ExtResource("4_ysr3r")
 
+[node name="DisruptLayer" type="CanvasLayer" parent="Systems" unique_id=10019559]
+layer = 100
+
 [node name="WorldRoot" type="Node2D" parent="." unique_id=286303619]
 process_mode = 1
 

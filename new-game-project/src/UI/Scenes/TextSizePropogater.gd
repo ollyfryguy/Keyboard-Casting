@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 		textLabel.text = redOutText(GlobalActiveList.KnownText)
 	elif GlobalActiveList.UsedList + GlobalActiveList.ActiveList != GlobalActiveList.KnownText:
 		if tempFlag != true:
-			push_error("UsedList + ActiveList != KnownText. Last character of UsedList equals '", GlobalActiveList.UsedList.right(1), "' and the first character of ActiveList equals '", GlobalActiveList.ActiveList.left(1), "'")
+			#push_error("UsedList + ActiveList != KnownText. Last character of UsedList equals '", GlobalActiveList.UsedList.right(1), "' and the first character of ActiveList equals '", GlobalActiveList.ActiveList.left(1), "'")
 			tempFlag = true
 
 func escapeBBCode(text: String) -> String:

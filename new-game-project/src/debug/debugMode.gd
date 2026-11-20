@@ -25,7 +25,7 @@ func _isInputValid(event : InputEvent) -> bool:
 func _unhandled_key_input(event: InputEvent) -> void:
 	if debugModeToggle == true:
 		if event.keycode == Key.KEY_CTRL and _isInputValid(event):
-			requestedModifierCreation.emit("BlackoutModifier")
+			requestedModifierCreation.emit("Random")
 		
 		if event.keycode == Key.KEY_HOME and _isInputValid(event):
 			GlobalActiveList.PlayerText = GlobalActiveList.KnownText
@@ -38,4 +38,3 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func toggleDebugMode(status : bool) -> void:
 	debugModeToggle = status
 	debugModeToggled.emit(debugModeToggle)
-

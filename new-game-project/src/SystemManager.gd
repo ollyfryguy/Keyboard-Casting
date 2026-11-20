@@ -20,8 +20,8 @@ func _ready() -> void:
 	add_child(InputParser)
 
 	for child : Node in $ModifierHandler.get_children():
-		
-		$DictionarySystem.sentWordRequest.connect(child._updateKnownText)
+		if child.name != "TempTimer":
+			$DictionarySystem.sentWordRequest.connect(child._updateKnownText)
 	
 	var GameHUDRoot : Node = get_node("../GameHUDLayer/GameHUDRoot")
 	propogatedInputUpdate.connect(GameHUDRoot.propogateInputUpdate)

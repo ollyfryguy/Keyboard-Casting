@@ -3,8 +3,18 @@
 [ext_resource type="Script" uid="uid://q56hv80cuicj" path="res://src/modifiers/modifier_handler.gd" id="1_xxdbc"]
 [ext_resource type="PackedScene" uid="uid://cu2v7qsj8wd4g" path="res://src/Scenes/shift_modifier.tscn" id="2_oxvyk"]
 [ext_resource type="PackedScene" uid="uid://b75qsjkgad7uq" path="res://src/Scenes/blackout_modifier.tscn" id="3_5xmgx"]
+[ext_resource type="PackedScene" uid="uid://cnr8212j4qlve" path="res://glitch_effect.tscn" id="4_g5o1g"]
+[ext_resource type="PackedScene" uid="uid://c2uh7knsrjskr" path="res://src/abilities/enemy/screen_shatter.tscn" id="5_221ax"]
 
 [node name="ModifierHandler" type="Node" unique_id=1237030266]
 script = ExtResource("1_xxdbc")
 ShiftModifierScene = ExtResource("2_oxvyk")
 BlackoutModifierScene = ExtResource("3_5xmgx")
+GlitchEffectScene = ExtResource("4_g5o1g")
+WaveEffectScene = ExtResource("5_221ax")
+
+[node name="TempTimer" type="Timer" parent="." unique_id=444832442]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="TempTimer" to="." method="_onTempTimerTimeout"]

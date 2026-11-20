@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Keyboard Casting"
-config/version="0.2.0 PROTO"
+config/version="0.3.1 PROTO"
 run/main_scene="uid://n522hlur74eg"
 config/features=PackedStringArray("4.7", "Forward Plus")
 run/max_fps=120
@@ -21,8 +21,8 @@ config/icon="res://icon.svg"
 
 GlobalActiveList="*uid://goyr3bmuhc3d"
 DebugMode="*uid://d4airmtlkimsh"
-ModifierPointerList="*uid://bwn3kfxawrdwl"
 TextDictionary="*uid://d07ro72k7l3m4"
+ModifierPointerList="*uid://3ug24nqe6x21"
 
 [debug]
 
