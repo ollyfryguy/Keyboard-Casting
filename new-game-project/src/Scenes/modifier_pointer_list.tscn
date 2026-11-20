@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://3ug24nqe6x21"]
+
+[ext_resource type="Script" uid="uid://bwn3kfxawrdwl" path="res://src/modifiers/ModifierPointerList.gd" id="1_x2d86"]
+[ext_resource type="PackedScene" uid="uid://cu2v7qsj8wd4g" path="res://src/Scenes/shift_modifier.tscn" id="2_75lbm"]
+[ext_resource type="PackedScene" uid="uid://cnr8212j4qlve" path="res://glitch_effect.tscn" id="3_7xfhb"]
+[ext_resource type="PackedScene" uid="uid://c2uh7knsrjskr" path="res://src/abilities/enemy/screen_shatter.tscn" id="4_n0r0y"]
+
+[node name="ModifierPointerList" type="Node" unique_id=1282013526]
+script = ExtResource("1_x2d86")
+ShiftModifier = ExtResource("2_75lbm")
+GlitchEffect = ExtResource("3_7xfhb")
+WaveEffect = ExtResource("4_n0r0y")
